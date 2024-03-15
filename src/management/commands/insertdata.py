@@ -3,10 +3,13 @@ from src.models import *
 
 
 class Command(BaseCommand):
-    help = 'Inserts initial data into the database'
+    help = 'CAUTION!! Inserts initial data into the database FOR TEST PURPOSES IN LOCAL ENVIRONMENT'
 
     def handle(self, *args, **kwargs):
-        u = User.objects.create_user(username='testuser', password='password123')
+        u = User.objects.filter(username='testuser').first()
+        if u:
+            return
+        u = User.objects.create_user(username='testuser', password='password123', is_staff=True, is_superuser=True)
         Account.objects.create(user=u, balance=100.00)
         Cryptocurrency.objects.create(name='ABAN', price=4.00)
         Cryptocurrency.objects.create(name='BTC', price=67.00)

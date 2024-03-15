@@ -3,13 +3,13 @@ FROM python:3.11
 
 WORKDIR /app
 
-COPY purchase .
+COPY . .
 
 RUN pip install -r requirements.txt
 
 EXPOSE 8000
 
-COPY initialize.sh initial.sh
-RUN chmod +x initail.sh
+COPY initialize.sh initialize.sh
+RUN chmod +x initialize.sh
 
-ENTRYPOINT ["./initial.sh"]
+ENTRYPOINT ["./initialize.sh"]

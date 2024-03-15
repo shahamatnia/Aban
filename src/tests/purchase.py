@@ -13,7 +13,7 @@ from src.services import OrderService
 
 class PurchaseOrderTest(APITestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username='testuser', password='password123')
+        self.user = User.objects.create_user(username='test', password='password123')
         self.account = Account.objects.create(user=self.user, balance=100.00)
         self.crypto = Cryptocurrency.objects.create(name='ABAN', price=4.00)
         self.client.force_authenticate(user=self.user)

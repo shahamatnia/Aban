@@ -13,7 +13,7 @@ class DBConnectionConfigs:
     ENGINE = 'django.db.backends.postgresql'
     NAME = 'aban'
     USER = 'aban'
-    PASSWORD = 'abanPass'
+    PASSWORD = 'abanpass'
     HOST = 'db'
     PORT = 5432
 

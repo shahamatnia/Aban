@@ -15,3 +15,5 @@ DATABASES = {
         'PORT': DBCONNECTION.PORT,
     }
 }
+
+REDIS_HOST = 'redis'

@@ -39,7 +39,7 @@ class OrderService:
 
         key = f"{pending_cost_prefix}:{order.cryptocurrency.name}"
         amount_limit = cost_limit / order.cryptocurrency.price
-        result = primary_redis_client.eval(lua_script, 1, key, order.amount, amount_limit)
+        result = primary_redis_client.eval(lua_script, 1, key, float(order.amount), amount_limit)
 
         if result:
             return Decimal(result)

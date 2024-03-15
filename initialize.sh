@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Wait for the Postgres database to be available
-python manage.py wait_for_db
 
 # Apply database migrations
 python manage.py migrate

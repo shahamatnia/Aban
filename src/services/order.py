@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+from django.conf import settings
 from django.db.models import Sum, F, DecimalField
 from django.db.models.functions import Cast
 
@@ -11,7 +12,7 @@ from purchase.redis import pending_cost_prefix, primary_redis_client
 class OrderService:
 
     @classmethod
-    def _update_pending_amount(cls, order: PurchaseOrder, cost_limit=set):
+    def _update_pending_amount(cls, order: PurchaseOrder, cost_limit=settings.PURCHASE.MIN_COST_INSTANT):
         """
         Update the total pending amount for a given currency with the current purchase amount.
         If the new total_amount * price exceeds the cost_limit, reset the cache and return the total amount.

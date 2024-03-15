@@ -20,7 +20,7 @@ ease of setup and scalability.
 Clone the repository and navigate into the project directory:
 
 ```bash
-git clone 
+git clone https://github.com/shahamatnia/Aban.git
 cd django-crypto-exchange
 docker-compose up --build
 ```

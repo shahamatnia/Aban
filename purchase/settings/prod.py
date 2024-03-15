@@ -1,0 +1,17 @@
+from .base import *
+
+DEBUG = False
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+SECRET_KEY = DJANGO_.SECRET_KEY
+
+DATABASES = {
+    'default': {
+        'ENGINE': DBCONNECTION.ENGINE,
+        'NAME': DBCONNECTION.NAME,
+        'USER': DBCONNECTION.USER,
+        'PASSWORD': DBCONNECTION.PASSWORD,
+        'HOST': DBCONNECTION.HOST,
+        'PORT': DBCONNECTION.PORT,
+    }
+}

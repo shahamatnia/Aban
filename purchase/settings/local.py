@@ -21,7 +21,7 @@ DATABASES = {
         'PORT': DBCONNECTION.PORT,
     }
 }
-#
+
 # REDIS_HOST = 'localhost'
 
 REDIS_HOST = 'redis'

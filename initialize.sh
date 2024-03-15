@@ -8,6 +8,8 @@ python manage.py migrate
 
 if [ "$ENV_TYPE" != "production" ]; then
   python manage.py insertdata
+  exec python manage.py test
+
 fi
 
 # Start the Django development server

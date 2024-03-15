@@ -1,11 +1,13 @@
 from decimal import Decimal
 
+import redis
+from django.conf import settings
 from django.contrib.auth.models import User
-from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from purchase.redis import RedisCli
 from src.models import Account
 from src.models import Cryptocurrency, PurchaseOrder
 from src.services import OrderService
@@ -17,6 +19,9 @@ class PurchaseOrderTest(APITestCase):
         self.account = Account.objects.create(user=self.user, balance=100.00)
         self.crypto = Cryptocurrency.objects.create(name='ABAN', price=4.00)
         self.client.force_authenticate(user=self.user)
+        # TODO should handle different env for test, for now we just monkeypatch redis!
+        RedisCli.pending_cost_prefix = 'test:' + RedisCli.pending_cost_prefix
+        RedisCli.primary_redis_client = redis.Redis(host=settings.REDIS_HOST, port=6379, db=15)
 
     def test_purchase_order_creation(self):
         url = reverse('purchase_orders')
@@ -37,5 +42,9 @@ class PurchaseOrderTest(APITestCase):
             )
 
             OrderService.aggregate_small_orders(order)
-
+        print(list(map(vars, PurchaseOrder.objects.all())))
         self.assertEqual(PurchaseOrder.objects.filter(status='pending').count(), 1)
+
+    def tearDown(self):
+        RedisCli.primary_redis_client.flushdb()
+        super().tearDown()

@@ -6,7 +6,7 @@ from django.db.models.functions import Cast
 
 from src.models import PurchaseOrder
 from src.services import ExchangeService
-from purchase.redis import pending_cost_prefix, primary_redis_client
+from purchase.redis import RedisCli
 
 
 class OrderService:
@@ -37,9 +37,9 @@ class OrderService:
         end
         """
 
-        key = f"{pending_cost_prefix}:{order.cryptocurrency.name}"
+        key = f"{RedisCli.pending_cost_prefix}:{order.cryptocurrency.name}"
         amount_limit = cost_limit / order.cryptocurrency.price
-        result = primary_redis_client.eval(lua_script, 1, key, float(order.amount), amount_limit)
+        result = RedisCli.primary_redis_client.eval(lua_script, 1, key, float(order.amount), amount_limit)
 
         if result:
             return Decimal(result)

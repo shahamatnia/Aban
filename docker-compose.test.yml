@@ -4,9 +4,9 @@ services:
   db:
     image: postgres:latest
     environment:
-      POSTGRES_DB: test_db
-      POSTGRES_USER: test_user
-      POSTGRES_PASSWORD: test_pass
+      POSTGRES_DB: aban
+      POSTGRES_USER: aban
+      POSTGRES_PASSWORD: abanpass
 
   redis:
     image: "redis:latest"
